@@ -15,16 +15,17 @@ class Car{
         this.controls=new Controls();
     }
 
-    update(){
+    update(roadBorders){
         this.#move();
-        this.sensor.update();
+        this.sensor.update(roadBorders);
     }
+
     #move(){
         if(this.controls.forward){
             this.speed+=this.acceleration;
         }
         if(this.controls.reverse){
-            this.speed-=this.acceleration; 
+            this.speed-=this.acceleration;
         }
 
         if(this.speed>this.maxSpeed){
@@ -56,13 +57,13 @@ class Car{
 
         this.x-=Math.sin(this.angle)*this.speed;
         this.y-=Math.cos(this.angle)*this.speed;
-        
     }
 
     draw(ctx){
         ctx.save();
         ctx.translate(this.x,this.y);
         ctx.rotate(-this.angle);
+
         ctx.beginPath();
         ctx.rect(
             -this.width/2,
@@ -75,6 +76,5 @@ class Car{
         ctx.restore();
 
         this.sensor.draw(ctx);
-
     }
 }
