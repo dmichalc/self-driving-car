@@ -10,6 +10,7 @@ class Car{
         this.maxSpeed=3;
         this.friction=0.05;
         this.angle=0;
+        this.damaged=false;
 
         this.sensor=new Sensor(this);
         this.controls=new Controls();
@@ -26,8 +27,8 @@ class Car{
         const rad=Math.hypot(this.width,this.height)/2;
         const alpha=Math.atan2(this.width,this.height);
             points.push({
-               x:this.x-Math.sin(this.angle-alpha)*rad,
-               y:this.y-Math.cos(this.angle-alpha)*rad 
+               x:this.x-Math.sin(this.angle-alpha)*rad*3,
+               y:this.y-Math.cos(this.angle-alpha)*rad*3 
             });
             points.push({
                 x:this.x-Math.sin(this.angle+alpha)*rad,
