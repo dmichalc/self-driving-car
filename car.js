@@ -19,7 +19,22 @@ class Car{
     update(roadBorders){
         this.#move();
         this.polygon=this.#createPolygon();
+        this.damaged=this.#assessDamage(roadBorders);
         this.sensor.update(roadBorders);
+    }
+
+    #assessDamage(roadBoarders){
+        for(let i=0;i<roadBoarders.length;i++){
+            if(polysIntersect(this.polygon,roadBoarders[i])){
+                return true;
+        }
+    }
+    return false;
+
+        this.#move();
+        this.polygon=this.#createPolygon();
+        this.damaged=this.#assessDamage(roadBoarders);
+        this.sensor.update(roadBaorders);
     }
 
     #createPolygon(){
@@ -85,6 +100,11 @@ class Car{
     }
 
     draw(ctx){
+        if(this.damaged){
+            ctx.fillStyle="gray";
+        }else{
+            ctx.fillStyle="black";
+        }
         ctx.beginPath();
         ctx.moveTo(this.polygon[0].x,this.polygon[0].y);
         for(let i=1;i<this.polygon.length;i++){
@@ -92,7 +112,6 @@ class Car{
         }
         ctx.fill();
       
-
         this.sensor.draw(ctx);
     }
 }
