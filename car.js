@@ -15,7 +15,6 @@ class Car{
         if(controlType!="DUMMY"){
             this.sensor=new Sensor(this);
         }
-       
         this.controls=new Controls(controlType);
     }
 
@@ -25,8 +24,8 @@ class Car{
             this.polygon=this.#createPolygon();
             this.damaged=this.#assessDamage(roadBorders,traffic);
         }
-        if(this.sensor){
-        this.sensor.update(roadBorders,traffic);
+            if(this.sensor){
+            this.sensor.update(roadBorders,traffic);
     }
 }
 
@@ -35,13 +34,14 @@ class Car{
             if(polysIntersect(this.polygon,roadBorders[i])){
                 return true;
             }
-        }for(let i=0;i<traffic.length;i++){
+        }
+        for(let i=0;i<traffic.length;i++){
             if(polysIntersect(this.polygon,traffic[i].polygon)){
                 return true;
             }
+        }
         return false;
     }
-}
 
     #createPolygon(){
         const points=[];
@@ -117,8 +117,9 @@ class Car{
             ctx.lineTo(this.polygon[i].x,this.polygon[i].y);
         }
         ctx.fill();
-    if(this.sensor){
-        this.sensor.draw(ctx);
-    }
+
+        if(this.sensor){
+            this.sensor.draw(ctx);
+        }
     }
 }
